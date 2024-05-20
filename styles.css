@@ -1,0 +1,12 @@
+body {
+    background-image: url('');
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    background-size: cover;
+    background-color: contain;
+}
+
+h1 {
+    margin: 2em;
+    text-align: center;
+}
