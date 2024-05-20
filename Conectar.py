@@ -1,15 +1,22 @@
+from flask import Flask, render_template
 import pymysql
 
-miConexion = pymysql.connect(host ='localhost',user ='root',passwd ='123daniel...',db = 'ubicaciones')
-cur = miConexion.cursor()
+app = Flask(__name__)
 
-cur.execute('select Id_Departamento, Nombre_Departamento from departamento')
-for Id_Departamento, Nombre_Departamento in cur.fetchall():
-    print(Id_Departamento," / ",Nombre_Departamento)
+@app.route('/')
+def home():
+    miConexion = pymysql.connect(host ='localhost',user ='root',passwd ='123daniel...',db = 'ubicaciones')
+    cur = miConexion.cursor()
 
-cur.execute('select Nombre_pais, Id_Pais from pais')
-for  Nombre_pais, Id_Pais in cur.fetchall():
-    print(Nombre_pais," / ",Id_Pais)
+    cur.execute('select Id_Departamento, Nombre_Departamento from departamento')
+    departamentos = cur.fetchall()
 
+    cur.execute('select Nombre_pais, Id_Pais from pais')
+    paises = cur.fetchall()
 
-miConexion.close()
+    miConexion.close()
+
+    return render_template('index.html', departamentos=departamentos, paises=paises)
+
+if __name__ == '__main__':
+    app.run(debug=True)

@@ -9,14 +9,18 @@
         <form action="/submit-form" method="post">
             <label for="paisNacimiento">País de nacimiento </label>
             <select id="paisNacimiento" name="paisNacimiento">
-                <option value="Colombia" selected>Colombia</option>
+                {% for pais in paises %}
+                    <option value="{{ pais[1] }}">{{ pais[0] }}</option>
+                {% endfor %}
             </select>
         </form>
 
         <form>
             <label for="deptoNacimiento">Departamento de nacimiento </label>
             <select id="deptoNacimiento" name="deptoNacimiento">
-                <option value="" disabled selected>Seleccione</option>
+                {% for departamento in departamentos %}
+                    <option value="{{ departamento[0] }}">{{ departamento[1] }}</option>
+                {% endfor %}
             </select>
         </form>
         <form>
@@ -25,6 +29,7 @@
                 <option value="" disabled selected>Seleccione</option>
             </select>
         </form>
+        <form>
             <input type="submit" value="Enviar">
         </form>
     </body>
