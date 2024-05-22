@@ -6,62 +6,25 @@ body {
     background-size: cover;
     background-color: contain;
 }
-.form-container {
-    width: 20px;
-    height: 20px;
-    margin: auto;
-  }
-  label{
-    font-weight:bold;
-  }
-  input[type=text] {
-    width: 20p;
-    padding: 10px;
-  }
-  input[type=submit] {
-    background-color: #7de680;
-    border: none;
-    color: white;
-    padding: 15px 32px;
-    text-align: center;
-    text-decoration: none;
-    display: inline-block;
-    font-size: 16px;
- }
- .tabs {
-    display: flex;
-    justify-content: space-between;
-    margin-bottom: 20px;
-}
-
-.tab {
-    padding: 10px 20px;
-    cursor: pointer;
-    border-bottom: 2px solid transparent;
-}
-
-.tab.active {
-    border-bottom: 2px solid #007bff;
-}
-
 h1 {
     margin: 2em;
     text-align: center;
 }
-label {
-    font-weight: bold;
+
+.contenedor {
+    display: flex;
+    justify-content: center;
+    align-items: left;
+    flex-direction: line;
 }
 
-input[type="text"],
-input[type="email"],
-input[type="password"] {
-    padding: 10px;
-    margin-bottom: 15px;
-    border: 1px solid #ccc;
-    border-radius: 3px;
+.registro {
+    margin-block-end: 1.30em;
+    margin-block-start: .90em;
+    margin-left: .30em;
+    margin-right: .30em;
+    height: 380px;
+    width: 350px;
+    background-color: #81B29A;
+    filter: grayscale(100%);    
 }
-
-input[type="submit"]:hover {
-    background-color: #0056b3;
-}
-

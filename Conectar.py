@@ -39,6 +39,8 @@ def submit_form():
     if password == confirm_password:
         cur.execute('INSERT INTO registro (Correo_Electronico, Nombre, Apellido, Pais_Nacimiento, Departamento_Nacimiento, Municipio_Nacimiento, Telefono, Contrasena, Confirma_Contrasena) VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s)', (email, nombre, apellido, pais, departamento, municipio, telefono, password, confirm_password))
         miConexion.commit()
+    else:
+        return 'La contraseña y la confirmación de la contraseña no coinciden.', 400
 
     miConexion.close()
 
