@@ -5,26 +5,193 @@ body {
     background-attachment: fixed;
     background-size: cover;
     background-color: contain;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    margin: 0;
 }
 h1 {
     margin: 2em;
     text-align: center;
 }
 
-.contenedor {
+.wrapper {
+    --input-focus-color: #2d8cf0;
+    --font-color: #323232;
+    --font-color-sub: #666;
+    --bg-color: #fff;
+    --bg-color-alt: #666;
+    --main-color: #323232;
+}
+.switch {
+    transform: translateY(-200px);
+    position: relative;
     display: flex;
+    flex-direction: column;
     justify-content: center;
-    align-items: left;
-    flex-direction: line;
+    align-items: center;
+    gap: 30px;
+    width: 50px;
+    height: 20px;
 }
 
-.registro {
-    margin-block-end: 1.30em;
-    margin-block-start: .90em;
-    margin-left: .30em;
-    margin-right: .30em;
-    height: 380px;
-    width: 350px;
-    background-color: #81B29A;
-    filter: grayscale(100%);    
+.card-side::before {
+    position: absolute;
+    content: 'Log in';
+    left: -70px;
+    top: 0;
+    width: 100px;
+    text-decoration: underline;
+    color: var(--font-color);
+    font-weight: 600;
 }
+.card-side::after {
+    position: absolute;
+    content: 'Log in';
+    left: 70px;
+    top: 0;
+    width: 100px;
+    text-decoration: none;
+    color: var(--font-color);
+    font-weight: 600;
+}
+.toggle {
+    opacity: 0;
+    width: 0;
+    height: 0;
+}
+.slider {
+    box-sizing: border-box;
+    border-radius: 5px;
+    border: 2px solid var(--main-color);
+    box-shadow: 4px 4px var(--main-color);
+    position: absolute;
+    cursor: pointer;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: var(--bg-colorcolor);
+    transition: 0.3s;
+}
+.slider:before {
+    box-sizing: border-box;
+    position: absolute;
+    content: '';
+    height: 20px;
+    width: 20px;
+    border: 2px solid var(--main-color);
+    border-radius: 5px;
+    left: -2px;
+    bottom: 2px;
+    background-color: var(--bg-color);
+    box-shadow: 0 3px 0 var(--main-color);
+    transition: 0.3s;
+}
+.toggle:checked + .slider {
+    background-color: var(--input-focus);
+}
+.toggle:checked + .slider:before {
+    transform: translateX(30px);
+}
+.toggle:checked ~ .card-side:before {
+    text-decoration: none;
+}
+.toggle:checked ~ .card-side:after {
+    text-decoration: underline;
+}
+.flip-card__front, .flip-card__back {
+    padding: 30px;
+    position: absolute;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    -webkit-backface-visibility: hidden;
+    backface-visibility: hidden;
+    background: lightgray;
+    gap: 20px;
+    border-radius: 5px;
+    border: 2px solid var(--main-color);
+    box-shadow: 4px 4px var(--main-color);
+}
+.flip-card__back {
+    width: 300;
+    transform: rotateY(180deg);
+}
+.flip-card__form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+
+}
+.title {
+    margin: 20px 0 20px 0;
+    font-size: 25px;
+    font-weight: 900;
+    text-align: center;
+    color: var(--main-color)
+}
+.flip-card__inner {
+    transition: transform 0.8s;
+    transform-style: preserve-3d;
+}
+
+.toggle:checked ~ .flip-card__inner {
+    transform: rotateY(180deg);
+}
+
+.avatars {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    transform: translate(100px, 0);
+}
+.avatar-img:nth-child(2) {
+    transform: translate(-100px, 0);
+
+}
+.avatar-img:nth-child(3) {
+    transform: translate(-200px, 0);
+}
+.avatar-img {
+    cursor: pointer;
+    width: 150px;
+    height: 150px;
+    object-fit: cover;
+    border-radius: 50%;
+    border: solid 2px #fff;
+    transition: all 0.3s;
+}
+.avatar-img:hover:is(.avatar-img:nth-child(1), .avatar-img:nth-child(2)) {
+    margin-right: 120px;
+}
+.avatar-img:hover {
+    box-shadow: 0 0 5px 5px pink;
+}
+
+ input[type=submit]  {
+    --bg: #ff8e8e;
+    --hover-bg: #ff6e6e;
+    --hover-text: #000;
+    color: #fff;
+    cursor: pointer;
+    border: 1px solid var(--bg);
+    border-radius: .4px;
+    padding: .8em 2em;
+    background: var(--bg);
+    transition: .2s;
+  }
+  
+  input[type=submit]:hover {
+    color: var(--hover-text);
+    transform: translate(0, .25rem);
+    background: var(--hover-bg);
+    box-shadow: .25rem .25rem var(--bg);
+  }
+  
+  input[type=submit]:active {
+    transform: translate(0);
+    box-shadow: none;
+  }
