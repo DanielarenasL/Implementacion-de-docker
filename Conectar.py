@@ -5,6 +5,7 @@ app = Flask(__name__)
 
 @app.route('/', methods=['GET'])
 def home():
+
     miConexion = pymysql.connect(host ='localhost',user ='root',passwd ='123daniel...',db = 'ubicaciones')
     cur = miConexion.cursor()
 
@@ -23,6 +24,7 @@ def home():
 
 @app.route('/submit-form', methods=['POST'])
 def submit_form():
+
     miConexion = pymysql.connect(host ='localhost',user ='root',passwd ='123daniel...',db = 'ubicaciones')
     cur = miConexion.cursor()
 
