@@ -4,6 +4,42 @@
         <meta charset="UTF-8">
         <title>Formulario de Registro</title>
         <link rel="stylesheet" href="/static/styles.css">
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+        <script>
+        $(document).ready(function(){
+            $('#paisNacimiento').change(function(){
+                var paisId = $(this).val();
+                $.ajax({
+                    url: '/get_departamentos/'+paisId,
+                    type: 'get',
+                    success: function(response){
+                        var departamentos = response.departamentos;
+                        var deptoSelect = $('#deptoNacimiento');
+                        deptoSelect.empty();
+                        $.each(departamentos, function(key, value){
+                            deptoSelect.append('<option value="'+value[0]+'">'+value[1]+'</option>');
+                        });
+                    }
+                });
+            });
+
+            $('#deptoNacimiento').change(function(){
+                var deptoId = $(this).val();
+                $.ajax({
+                    url: '/get_municipios/'+deptoId,
+                    type: 'get',
+                    success: function(response){
+                        var municipios = response.municipios;
+                        var munSelect = $('#municipioNacimiento');
+                        munSelect.empty();
+                        $.each(municipios, function(key, value){
+                            munSelect.append('<option value="'+value[0]+'">'+value[1]+'</option>');
+                        });
+                    }
+                });
+            });
+        });
+        </script>
     </head>
     <body>
         {% if error_message %}

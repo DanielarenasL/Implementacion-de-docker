@@ -1,11 +1,10 @@
-from flask import Flask, render_template, request
+from flask import Flask, render_template, request, jsonify
 import pymysql
 
 app = Flask(__name__)
 
 @app.route('/', methods=['GET'])
 def home():
-
     miConexion = pymysql.connect(host ='localhost',user ='root',passwd ='123daniel...',db = 'ubicaciones')
     cur = miConexion.cursor()
 
@@ -22,9 +21,32 @@ def home():
 
     return render_template('index.html', departamentos=departamentos, paises=paises, municipios=municipios)
 
+@app.route('/get_departamentos/<paisId>', methods=['GET'])
+def get_departamentos(paisId):
+    miConexion = pymysql.connect(host ='localhost',user ='root',passwd ='123daniel...',db = 'ubicaciones')
+    cur = miConexion.cursor()
+
+    cur.execute('select Id_Departamento, Nombre_Departamento from departamento where Id_Pais = %s', (paisId,))
+    departamentos = cur.fetchall()
+
+    miConexion.close()
+
+    return jsonify(departamentos=departamentos)
+
+@app.route('/get_municipios/<deptoId>', methods=['GET'])
+def get_municipios(deptoId):
+    miConexion = pymysql.connect(host ='localhost',user ='root',passwd ='123daniel...',db = 'ubicaciones')
+    cur = miConexion.cursor()
+
+    cur.execute('select Id_municipio, Nombre_municipio from municipio where Id_departamento = %s', (deptoId,))
+    municipios = cur.fetchall()
+
+    miConexion.close()
+
+    return jsonify(municipios=municipios)
+
 @app.route('/submit-form', methods=['POST'])
 def submit_form():
-
     miConexion = pymysql.connect(host ='localhost',user ='root',passwd ='123daniel...',db = 'ubicaciones')
     cur = miConexion.cursor()
 
