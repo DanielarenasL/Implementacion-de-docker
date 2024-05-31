@@ -122,6 +122,9 @@ body {
     height: 20px;
     width: 10em;
   }
+  .u-section-1 .u-sheet-1 {
+    min-height: 400px;
+  }
 
   select {
     font-size: 18px;

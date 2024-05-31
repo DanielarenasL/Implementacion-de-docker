@@ -72,7 +72,13 @@ def login_post():
 
 @app.route('/inicio')
 def inicio():
-    return render_template('inicio.html')
+    miConexion = pymysql.connect(host ='localhost',user ='root',passwd ='123daniel...',db = 'proyecto')
+    cur = miConexion.cursor()
+    cur.execute('SELECT Nombre_Producto FROM Producto')
+    productos = cur.fetchall()
+    miConexion.close()
+
+    return render_template('inicio.html', productos=productos)
 
 @app.route('/protected')
 @login_required
@@ -156,11 +162,50 @@ def agregar_mercancia():
     else:
         return 'No tienes permiso para acceder a esta página'
 
+@app.route('/agregar_mercancia_post', methods=['POST'])
+@login_required
+def agregar_mercancia_post():
+    if current_user.es_admin:
+        nombre_producto = request.form['nombre_producto']
+        descripcion_producto = request.form['descripcion_producto']
+        precio_producto = request.form['precio_producto']
+        tipo_producto = request.form['tipo_producto']
+        talla_producto = request.form['talla_producto']
+        color_producto = request.form['color_producto']
+        cantidad_producto = request.form['cantidad_producto']
+
+        miConexion = pymysql.connect(host ='localhost',user ='root',passwd ='123daniel...',db = 'proyecto')
+        cur = miConexion.cursor()
+        cur.execute('INSERT INTO Producto (Nombre_Producto, Descripcion_Producto, Precio_Producto, Tipo_Producto, Talla_Producto, Color_Producto, Cantidad) VALUES (%s, %s, %s, %s, %s, %s, %s)', (nombre_producto, descripcion_producto, precio_producto, tipo_producto, talla_producto, color_producto, cantidad_producto))
+        miConexion.commit()
+        miConexion.close()
+
+        return 'La mercancía ha sido agregada exitosamente'
+    else:
+        return 'No tienes permiso para acceder a esta página'
+
 @app.route('/eliminar_mercancia', methods=['GET'])
 @login_required
 def eliminar_mercancia():
     if current_user.es_admin:
         return render_template('eliminar_mercancia.html')
+    else:
+        return 'No tienes permiso para acceder a esta página'
+    
+@app.route('/eliminar_mercancia_post', methods=['POST'])
+@login_required
+def eliminar_mercancia_post():
+    if current_user.es_admin:
+        codigo_producto = request.form['codigo_producto']
+        cantidad_producto = request.form['cantidad_producto']
+
+        miConexion = pymysql.connect(host ='localhost',user ='root',passwd ='123daniel...',db = 'proyecto')
+        cur = miConexion.cursor()
+        cur.execute('UPDATE Producto SET Cantidad = Cantidad - %s WHERE Id_Producto = %s', (cantidad_producto, codigo_producto))
+        miConexion.commit()
+        miConexion.close()
+
+        return 'La mercancía ha sido eliminada exitosamente'
     else:
         return 'No tienes permiso para acceder a esta página'
 
@@ -171,12 +216,61 @@ def aplicar_descuento():
         return render_template('aplicar_descuento.html')
     else:
         return 'No tienes permiso para acceder a esta página'
+    
+@app.route('/aplicar_descuento_post', methods=['POST'])
+@login_required
+def aplicar_descuento_post():
+    if current_user.es_admin:
+        codigo_producto = request.form['codigo_producto']
+        porcentaje_descuento = request.form['porcentaje_descuento']
+
+        miConexion = pymysql.connect(host ='localhost',user ='root',passwd ='123daniel...',db = 'proyecto')
+        cur = miConexion.cursor()
+        cur.execute('UPDATE Producto SET Precio_Producto = Precio_Producto - (Precio_Producto * %s / 100) WHERE Id_Producto = %s', (porcentaje_descuento, codigo_producto))
+        miConexion.commit()
+        miConexion.close()
+
+        return 'El descuento ha sido aplicado exitosamente'
+    else:
+        return 'No tienes permiso para acceder a esta página'
+
 
 @app.route('/quitar_descuento', methods=['GET'])
 @login_required
 def quitar_descuento():
     if current_user.es_admin:
         return render_template('quitar_descuento.html')
+    else:
+        return 'No tienes permiso para acceder a esta página'
+    
+@app.route('/quitar_descuento_post', methods=['POST'])
+@login_required
+def quitar_descuento_post():
+    if current_user.es_admin:
+        codigo_producto = request.form['codigo_producto']
+        porcentaje_descuento = request.form['porcentaje_descuento']
+
+        miConexion = pymysql.connect(host ='localhost',user ='root',passwd ='123daniel...',db = 'proyecto')
+        cur = miConexion.cursor()
+        cur.execute('UPDATE Producto SET Precio_Producto = Precio_Producto + (Precio_Producto * %s / 100) WHERE Id_Producto = %s', (porcentaje_descuento, codigo_producto))
+        miConexion.commit()
+        miConexion.close()
+
+        return 'El descuento ha sido quitado exitosamente'
+    else:
+        return 'No tienes permiso para acceder a esta página'
+
+@app.route('/ver_stock', methods=['GET'])
+@login_required
+def ver_stock():
+    if current_user.es_admin:
+        miConexion = pymysql.connect(host ='localhost',user ='root',passwd ='123daniel...',db = 'proyecto')
+        cur = miConexion.cursor()
+        cur.execute('SELECT Id_Producto, Nombre_Producto, Cantidad, Precio_Producto, Talla_Producto, Color_Producto FROM Producto')
+        stock = cur.fetchall()
+        miConexion.close()
+
+        return render_template('ver_stock.html', stock=stock)
     else:
         return 'No tienes permiso para acceder a esta página'
 
