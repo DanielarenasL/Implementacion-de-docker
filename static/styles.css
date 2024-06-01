@@ -10,6 +10,12 @@ body {
     min-height: 100vh;
     margin: 0;
 }
+.logo  {
+    position: absolute;
+    display: block;
+    margin-left: 300px;
+}
+
 
 .wrapper {
     position: absolute;

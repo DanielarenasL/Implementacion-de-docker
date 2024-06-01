@@ -4,8 +4,11 @@
     <meta charset="UTF-8">
     <title>Tienda de Ropa</title>
     <link rel="stylesheet" href="/static/estilosinicio.css">
+    <link rel="icon" href="/static/imagenes/Logo.png">
 </head>
 <body>
+    <img src="/static/imagenes/Logo.png" width="300" height="300" style="display: block; margin-left: auto; margin-right: auto;">
+    
 
     <div class="overlay"></div>
         <div class="menu" id="menu">
@@ -71,11 +74,12 @@
         });
     </script>
 
+        <!-- Add a search bar 
         <div class="barra_busqueda">
             <form action="/buscar" method="get">
                 <input type="text" name="q" placeholder="Buscar...">
             </form>
-        </div>
+        </div>-->
         <div class="carrusel">
             {% for producto in productos %}
             <div class="card">

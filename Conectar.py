@@ -68,7 +68,21 @@ def login_post():
     user.id = email
     user.es_admin = user_db[1]
     login_user(user)
-    return redirect(url_for('inicio'))  
+    return redirect(url_for('inicio'))
+
+@app.route('/logout')
+@login_required
+def logout():
+    logout_user()
+    return 'Has cerrado sesión'  
+
+@app.route('/protected')
+@login_required
+def protected():
+    if current_user.es_admin:
+        return 'Eres un administrador'
+    else:
+        return 'Eres un usuario'
 
 @app.route('/inicio')
 def inicio():
@@ -79,20 +93,6 @@ def inicio():
     miConexion.close()
 
     return render_template('inicio.html', productos=productos)
-
-@app.route('/protected')
-@login_required
-def protected():
-    if current_user.es_admin:
-        return 'Eres un administrador'
-    else:
-        return 'Eres un usuario'
-
-@app.route('/logout')
-@login_required
-def logout():
-    logout_user()
-    return 'Has cerrado sesión'
 
 @app.route('/', methods=['GET'])
 def home():
@@ -207,56 +207,43 @@ def eliminar_mercancia_post():
         return 'El producto ha sido eliminado exitosamente'
     else:
         return 'No tienes permiso para acceder a esta página'
-
-
-@app.route('/aplicar_descuento', methods=['GET'])
+    
+@app.route('/gestionar_mercancia', methods=['GET'])
 @login_required
-def aplicar_descuento():
+def gestionar_mercancia():
     if current_user.es_admin:
-        return render_template('aplicar_descuento.html')
+        return render_template('gestionar_mercancia.html')
     else:
         return 'No tienes permiso para acceder a esta página'
-    
-@app.route('/aplicar_descuento_post', methods=['POST'])
+
+@app.route('/gestionar_descuentos', methods=['GET'])
 @login_required
-def aplicar_descuento_post():
+def gestionar_descuentos():
+    if current_user.es_admin:
+        return render_template('gestionar_descuentos.html')
+    else:
+        return 'No tienes permiso para acceder a esta página'
+
+@app.route('/gestionar_descuentos_post', methods=['POST'])
+@login_required
+def gestionar_descuentos_post():
     if current_user.es_admin:
         codigo_producto = request.form['codigo_producto']
         porcentaje_descuento = request.form['porcentaje_descuento']
+        accion = request.form['accion']
 
         miConexion = pymysql.connect(host ='localhost',user ='root',passwd ='123daniel...',db = 'proyecto')
         cur = miConexion.cursor()
-        cur.execute('UPDATE Producto SET Precio_Producto = Precio_Producto - (Precio_Producto * %s / 100) WHERE Id_Producto = %s', (porcentaje_descuento, codigo_producto))
+
+        if accion == 'aplicar':
+            cur.execute('UPDATE Producto SET Precio_Producto = Precio_Producto - (Precio_Producto * %s / 100) WHERE Id_Producto = %s', (porcentaje_descuento, codigo_producto))
+        elif accion == 'quitar':
+            cur.execute('UPDATE Producto SET Precio_Producto = Precio_Producto + (Precio_Producto * %s / 100) WHERE Id_Producto = %s', (porcentaje_descuento, codigo_producto))
+
         miConexion.commit()
         miConexion.close()
 
-        return 'El descuento ha sido aplicado exitosamente'
-    else:
-        return 'No tienes permiso para acceder a esta página'
-
-
-@app.route('/quitar_descuento', methods=['GET'])
-@login_required
-def quitar_descuento():
-    if current_user.es_admin:
-        return render_template('quitar_descuento.html')
-    else:
-        return 'No tienes permiso para acceder a esta página'
-    
-@app.route('/quitar_descuento_post', methods=['POST'])
-@login_required
-def quitar_descuento_post():
-    if current_user.es_admin:
-        codigo_producto = request.form['codigo_producto']
-        porcentaje_descuento = request.form['porcentaje_descuento']
-
-        miConexion = pymysql.connect(host ='localhost',user ='root',passwd ='123daniel...',db = 'proyecto')
-        cur = miConexion.cursor()
-        cur.execute('UPDATE Producto SET Precio_Producto = Precio_Producto + (Precio_Producto * %s / 100) WHERE Id_Producto = %s', (porcentaje_descuento, codigo_producto))
-        miConexion.commit()
-        miConexion.close()
-
-        return 'El descuento ha sido quitado exitosamente'
+        return 'El descuento ha sido gestionado exitosamente'
     else:
         return 'No tienes permiso para acceder a esta página'
 
@@ -304,6 +291,6 @@ def actualizar_mercancia_post():
         return 'La mercancía ha sido actualizada exitosamente'
     else:
         return 'No tienes permiso para acceder a esta página'
-    
+
 if __name__ == '__main__':
     app.run(debug=True)
