@@ -197,17 +197,17 @@ def eliminar_mercancia():
 def eliminar_mercancia_post():
     if current_user.es_admin:
         codigo_producto = request.form['codigo_producto']
-        cantidad_producto = request.form['cantidad_producto']
 
         miConexion = pymysql.connect(host ='localhost',user ='root',passwd ='123daniel...',db = 'proyecto')
         cur = miConexion.cursor()
-        cur.execute('UPDATE Producto SET Cantidad = Cantidad - %s WHERE Id_Producto = %s', (cantidad_producto, codigo_producto))
+        cur.execute('DELETE FROM Producto WHERE Id_Producto = %s', (codigo_producto,))
         miConexion.commit()
         miConexion.close()
 
-        return 'La mercancía ha sido eliminada exitosamente'
+        return 'El producto ha sido eliminado exitosamente'
     else:
         return 'No tienes permiso para acceder a esta página'
+
 
 @app.route('/aplicar_descuento', methods=['GET'])
 @login_required
@@ -274,5 +274,36 @@ def ver_stock():
     else:
         return 'No tienes permiso para acceder a esta página'
 
+@app.route('/actualizar_mercancia', methods=['GET'])
+@login_required
+def actualizar_mercancia():
+    if current_user.es_admin:
+        return render_template('actualizar_mercancia.html')
+    else:
+        return 'No tienes permiso para acceder a esta página'
+
+@app.route('/actualizar_mercancia_post', methods=['POST'])
+@login_required
+def actualizar_mercancia_post():
+    if current_user.es_admin:
+        codigo_producto = request.form['codigo_producto']
+        cantidad_producto = int(request.form['cantidad_producto'])
+        accion = request.form['accion']
+
+        miConexion = pymysql.connect(host ='localhost',user ='root',passwd ='123daniel...',db = 'proyecto')
+        cur = miConexion.cursor()
+
+        if accion == 'agregar':
+            cur.execute('UPDATE Producto SET Cantidad = Cantidad + %s WHERE Id_Producto = %s', (cantidad_producto, codigo_producto))
+        elif accion == 'quitar':
+            cur.execute('UPDATE Producto SET Cantidad = Cantidad - %s WHERE Id_Producto = %s', (cantidad_producto, codigo_producto))
+
+        miConexion.commit()
+        miConexion.close()
+
+        return 'La mercancía ha sido actualizada exitosamente'
+    else:
+        return 'No tienes permiso para acceder a esta página'
+    
 if __name__ == '__main__':
     app.run(debug=True)
