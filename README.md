@@ -102,3 +102,23 @@ Se diseño la interfaz de inicio la cual se vera al ingresar los datos correspon
 Se diseño una interfaz administrador la cual cuenta con los botones de todas las opciones que tiene el administrador.  
 [![imagen-2024-06-06-115456069.png](https://i.postimg.cc/5ySCJRLx/imagen-2024-06-06-115456069.png)](https://postimg.cc/JHtncKpg)
 
+## Diseño de la Interfaz Gestionar descuento:
+Se diseño esta interfaz para que el administrador pueda aplicar un descuento a un producto de su tienda.
+[![imagen-2024-06-06-115911769.png](https://i.postimg.cc/vHj3N1Y3/imagen-2024-06-06-115911769.png)](https://postimg.cc/3dXXyxDv)
+
+## Diseño de la Interfaz ver stock:
+Se diseño esta interfaz con el proposito de facilitar al administrador estar pendiente de cuanto stock le queda de cada producto de su tienda, consiste en una tabla interactiva que verifica la tabla productos de la base de datos para saber cuantos productos tiene y que cantidad hay.
+[![imagen-2024-06-06-120334526.png](https://i.postimg.cc/5289HCjr/imagen-2024-06-06-120334526.png)](https://postimg.cc/qNMHSgsc)
+
+## Diseño de la Interfaz Administrar mercancia:
+Esta interfaz permite al administrador acceder a un producto mediante su Id y agregar o eliminar cantidades a dicho producto facilitando asi registrar el ingreso de un producto.
+[![imagen-2024-06-06-121211400.png](https://i.postimg.cc/5tXNgRtX/imagen-2024-06-06-121211400.png)](https://postimg.cc/8FVSPwMG)
+
+## Diseño de la interfaz Gestionar mercancia:
+Permite al administrador agregar un producto nuevo o eliminar uno existente dependiendo de lo que necesite.
+[![imagen-2024-06-06-121334938.png](https://i.postimg.cc/vZLK4rwD/imagen-2024-06-06-121334938.png)](https://postimg.cc/FYzpqJRQ)
+
+## Diseño de la Interfaz de carrito
+Permite al usuario ver los articulos que tiene en su carrito, asi como comprar un articulo de dicho carrito o eliminarlo.
+[![imagen-2024-06-06-121627011.png](https://i.postimg.cc/qvyNy71N/imagen-2024-06-06-121627011.png)](https://postimg.cc/6866NBJK)
+
