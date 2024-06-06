@@ -42,3 +42,63 @@ CSS es un lenguaje de diseño que se utiliza principalmente para diseñar págin
 Las bases de datos son el repositorio de datos esencial para todas las aplicaciones de software. Por ejemplo, cada vez que alguien realiza una búsqueda en Internet, inicia sesión en una cuenta o completa una transacción, un sistema de base de datos está almacenando la información para poder acceder a ella en el futuro.
 
 Una base de datos relacional almacena los datos en tablas separadas en lugar de poner todos los datos en un gran almacén. La estructura de la base de datos se organiza en archivos físicos optimizados para una mayor agilidad. El modelo de datos lógico, con objetos como tablas de datos, vistas, filas y columnas, ofrece un entorno de programación flexible. Se establecen reglas que rigen las relaciones entre los distintos campos de datos, como uno a uno, uno a muchos, únicos, obligatorios u opcionales, y "punteros" entre distintas tablas. La base de datos aplica estas reglas de modo que, con una base de datos bien diseñada, tu aplicación nunca ve datos incoherentes, duplicados, huérfanos, desfasados o ausentes.
+
+## Metodología para el Desarrollo de la Página Web:
+
+Para desarrollar la página web propuesta, se seguirá una metodología estructurada que abarca desde la configuración inicial del entorno de desarrollo hasta la implementación de la base de datos y la creación de contenido. A continuación, se detallan los pasos a seguir:
+
+## 1. Configuración del Entorno de Desarrollo
+
+Para comenzar, es necesario configurar el entorno de desarrollo. Esto incluye la instalación de herramientas y la preparación del sistema para el desarrollo web. Los pasos a seguir son los siguientes:
+
+Instalación de Herramientas: Se instalarán las herramientas necesarias, como un editor de texto o un entorno de desarrollo integrado y una base de datos, dependiendo de las preferencias del desarrollador.
+
+## 2. Creación de la Base de Datos
+
+Para almacenar y gestionar los datos de la página web, se utilizará MySQL, Los pasos para crear la base de datos son los siguientes:
+
+    1. Se creo la base de datos 'proyecto'  
+
+    2. Se crearon las siguientes tablas:  
+
+        -Producto
+        -Usuarios
+        -Pais
+        -Departamento
+        -Municipio
+        -Comentarios
+        -Carrito
+        -Items_Carrito
+        -Valoraciones_Productos
+        cada una con sus respectivos atributos para que funcione  
+
+    3. Se añadieron nuevos registros a las tablas de Pais, Departamento, Municipio y un usuario administrador a la tabla Usuarios  
+
+    4. por medio de el archivo Conectar.py se realizo la conexion con el siguiente codigo: 
+
+    miConexion = pymysql.connect(host ='172.17.0.3',user ='admin',passwd ='admin',db = 'proyecto')
+    cur = miConexion.cursor()
+
+    lo cual crea la conexion local
+
+
+## 3. Diseño y Desarrollo de la Página Web:
+
+Con el entorno de desarrollo configurado y la base de datos lista, se procederá al diseño y desarrollo de la página web. Esto implica la creación de la estructura HTML, el diseño CSS y la implementación de la lógica del lado del servidor utilizando Flask. Los pasos a seguir fueron los siguientes:
+
+## Diseño de la Interfaz de Regitro: 
+Se diseño la interfaz de Registro de la página web utilizando HTML y CSS. Se prestará especial atención a la usabilidad y la experiencia del usuario.
+![imagen-2024-06-06-113615855.png](https://i.postimg.cc/ZYrRdJ6D/imagen-2024-06-06-113615855.png)
+
+## Diseño de la Interfaz de Inicio de Sesion:
+Se diseño la interfaz de Inicio de Sesion de la pagina web utilizando HTML y CSS. Conectado con la Base de datos para la verificacion de los datos
+[![imagen-2024-06-06-113946773.png](https://i.postimg.cc/Qt6JhcSv/imagen-2024-06-06-113946773.png)](https://postimg.cc/Hcyytcqt)
+
+## Diseño de la Interfaz de Inicio:
+Se diseño la interfaz de inicio la cual se vera al ingresar los datos correspondientes en el registro esta interfaz esta compuesta de tarjetas de compra una y una barra lateral con opciones.
+[![imagen-2024-06-06-114111958.png](https://i.postimg.cc/VvxZM2pj/imagen-2024-06-06-114111958.png)](https://postimg.cc/xNPPVp0C)
+
+## Diseño de la Interfaz de Administrador:
+Se diseño una interfaz administrador la cual cuenta con los botones de todas las opciones que tiene el administrador.  
+[![imagen-2024-06-06-115456069.png](https://i.postimg.cc/5ySCJRLx/imagen-2024-06-06-115456069.png)](https://postimg.cc/JHtncKpg)
+
