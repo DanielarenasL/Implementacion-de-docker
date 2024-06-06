@@ -125,13 +125,13 @@ Permite al usuario ver los articulos que tiene en su carrito, asi como comprar u
 ## 5. Estructura del proyecto
 La estructura consta de una carpeta principal llamada "TALLER-SISTEMAS", dentro de esta se encuentra los archivos Conectar.py, docker-compose.yml, dockerfile, readme.md, start.sh y requirements.txt. Las carpetas database en esta se encuentra un archivo dockerfile, static en esta se encuentra los archivos css que le dan el estilo al proyecto y una carpeta imagenes donde se encuentran las imagenes usadas en el proyecto y templates estan los HTML del proyecto.
 
-![imagen interfaz de inicio](/static/imagenes/Estructura.jpg)
+[![imagen-2024-06-06-140033711.png](https://i.postimg.cc/8ckjfKcb/imagen-2024-06-06-140033711.png)](https://postimg.cc/dkXqz987)
 
 ### Requirements.txt  
 
 En este archivo se encuentran las librerias necesarias para correr el proyecto.
 
-![imagen interfaz de inicio](/static/imagenes/requirements.jpg)
+[![imagen-2024-06-06-140247381.png](https://i.postimg.cc/8z7wrwrD/imagen-2024-06-06-140247381.png)](https://postimg.cc/K1yt6PNs)
 
 # Bibliografia
 
