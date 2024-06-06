@@ -129,7 +129,7 @@ La estructura consta de una carpeta principal llamada "TALLER-SISTEMAS", dentro 
 
 ### Requirements.txt  
 
-En este archivo se encuentran las librerias necesarias para correr el proyecto.
+En este archivo se encuentran las librerias necesarias para correr el proyecto, al ejecutar se instalaran si no se encuentran instaladas.
 
 [![imagen-2024-06-06-140247381.png](https://i.postimg.cc/8z7wrwrD/imagen-2024-06-06-140247381.png)](https://postimg.cc/K1yt6PNs)
 
