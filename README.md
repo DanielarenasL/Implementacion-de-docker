@@ -122,3 +122,27 @@ Permite al administrador agregar un producto nuevo o eliminar uno existente depe
 Permite al usuario ver los articulos que tiene en su carrito, asi como comprar un articulo de dicho carrito o eliminarlo.
 [![imagen-2024-06-06-121627011.png](https://i.postimg.cc/qvyNy71N/imagen-2024-06-06-121627011.png)](https://postimg.cc/6866NBJK)
 
+## 5. Estructura del proyecto
+La estructura consta de una carpeta principal llamada "TALLER-SISTEMAS", dentro de esta se encuentra los archivos Conectar.py, docker-compose.yml, dockerfile, readme.md, start.sh y requirements.txt. Las carpetas database en esta se encuentra un archivo dockerfile, static en esta se encuentra los archivos css que le dan el estilo al proyecto y una carpeta imagenes donde se encuentran las imagenes usadas en el proyecto y templates estan los HTML del proyecto.
+
+![imagen interfaz de inicio](/static/imagenes/Estructura.jpg)
+
+### Requirements.txt  
+
+En este archivo se encuentran las librerias necesarias para correr el proyecto.
+
+![imagen interfaz de inicio](/static/imagenes/requirements.jpg)
+
+# Bibliografia
+
+### Python
+https://www.python.org/  
+https://docs.python.org/3/tutorial/  
+https://docs.python.org/3/index.html  
+https://www.amazon.com.mx/b?ie=UTF8&node=9570212011
+
+### Docker
+https://www.redhat.com/es/topics/containers/what-is-docker  
+
+### MySQL
+https://www.oracle.com/co/mysql/what-is-mysql/
